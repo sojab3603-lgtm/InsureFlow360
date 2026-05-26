@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#153551</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>This is Enterprise Grade InsureFlow 360 App.</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>InsureFlow 360</label>
+    <navType>Standard</navType>
+    <tabs>Customer__c</tabs>
+    <tabs>Insurance_Policy__c</tabs>
+    <tabs>Claim__c</tabs>
+    <tabs>Premium_Payment__c</tabs>
+    <tabs>Underwriting__c</tabs>
+    <tabs>Integration_Log__c</tabs>
+    <tabs>Fraud_Alert__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>InsureFlow_360_UtilityBar</utilityBar>
+</CustomApplication>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Insurance_Policy__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Insurance Policy</label>
+    <referenceTo>Insurance_Policy__c</referenceTo>
+    <relationshipLabel>Underwritings</relationshipLabel>
+    <relationshipName>Underwritings</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

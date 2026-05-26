@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Claim_Amount_limit</fullName>
+    <active>true</active>
+    <errorConditionFormula>Claim_Amount__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>Claim_Amount__c</errorDisplayField>
+    <errorMessage>Claim Amount cannot be negative.</errorMessage>
+</ValidationRule>
