@@ -1,10 +1,17 @@
 {
   "orgName": "InsureFlow360",
-  "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
+  "edition": "Enterprise",
+  "features": [
+    "AuthorApex",
+    "RecordTypes",
+    "MultiCurrency"
+  ],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser": true
     }
   }
 }
