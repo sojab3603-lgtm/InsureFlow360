@@ -5,6 +5,27 @@
         <default>false</default>
         <visible>false</visible>
     </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Approvals</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <classAccesses>
+        <apexClass>ClaimSelector</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClaimService</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClaimTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClaimUtility</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>false</editable>
@@ -83,6 +104,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Insurance_Policy__c.Expiring_In_30_Days__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Insurance_Policy__c.Policy_Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -134,6 +160,18 @@
         <layout>Insurance_Policy__c-Insurance Policy Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Insurance_Policy__c-Insurance Policy Layout</layout>
+        <recordType>Insurance_Policy__c.Health_Policy</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Insurance_Policy__c-Insurance Policy Layout</layout>
+        <recordType>Insurance_Policy__c.Life_Policy</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Insurance_Policy__c-Insurance Policy Layout</layout>
+        <recordType>Insurance_Policy__c.Vehicle_Policy</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Integration_Log__c-Integration Log Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -142,6 +180,21 @@
     <layoutAssignments>
         <layout>Underwriting__c-Underwriting Layout</layout>
     </layoutAssignments>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Insurance_Policy__c.Health_Policy</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Insurance_Policy__c.Life_Policy</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Insurance_Policy__c.Vehicle_Policy</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
     <tabVisibilities>
         <tab>Claim__c</tab>
         <visibility>DefaultOn</visibility>
@@ -160,6 +213,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Integration_Log__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>New_Customer_Registration_Page</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>

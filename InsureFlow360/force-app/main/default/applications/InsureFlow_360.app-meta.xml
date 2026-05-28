@@ -13,6 +13,7 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>InsureFlow 360</label>
     <navType>Standard</navType>
+    <tabs>New_Customer_Registration_Page</tabs>
     <tabs>Customer__c</tabs>
     <tabs>Insurance_Policy__c</tabs>
     <tabs>Claim__c</tabs>

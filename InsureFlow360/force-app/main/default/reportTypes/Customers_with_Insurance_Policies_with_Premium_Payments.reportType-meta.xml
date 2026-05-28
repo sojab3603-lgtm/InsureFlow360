@@ -137,6 +137,11 @@
             <field>End_Date__c</field>
             <table>Customer__c.Insurance_Policies__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Expiring_In_30_Days__c</field>
+            <table>Customer__c.Insurance_Policies__r</table>
+        </columns>
         <masterLabel>Insurance Policies</masterLabel>
     </sections>
     <sections>
