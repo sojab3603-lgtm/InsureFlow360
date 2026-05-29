@@ -21,13 +21,23 @@ public with sharing class ClaimTriggerHandler {
     }
 
     public void afterInsert(
-        List<Claim__c> newClaims
-    ) {
+    List<Claim__c> newClaims
+) {
 
-        ClaimService.createAuditLogs(
-            newClaims
-        );
+    ClaimService.createAuditLogs(
+        newClaims
+    );
+
+    List<Id> claimIds = new List<Id>();
+
+    for (Claim__c claim : newClaims) {
+        claimIds.add(claim.Id);
     }
+
+    System.enqueueJob(
+        new FraudDetectionQueueable(claimIds)
+    );
+}
 
     public void afterUpdate(
         List<Claim__c> newClaims,
