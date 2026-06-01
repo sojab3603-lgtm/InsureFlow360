@@ -1,0 +1,44 @@
+.summary-card {
+    background: white;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.status-completed {
+    color: #388e3c;
+    display: flex;
+    align-items: center;
+}
+
+.status-failed {
+    color: #d32f2f;
+    display: flex;
+    align-items: center;
+}
+
+.status-processing {
+    color: #f57c00;
+    display: flex;
+    align-items: center;
+}
+
+.status-pending {
+    color: #0070d2;
+    display: flex;
+    align-items: center;
+}
+
+.error-row {
+    background-color: #fff5f5;
+}
+
+.error-row td {
+    padding: 0 !important;
+}

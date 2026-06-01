@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Claim Alert Channel</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Channel for publishing and subscribing to claim alert events</description>
+    <lightningMessageFields>
+        <fieldName>claimId</fieldName>
+        <description>The ID of the claim</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>claimName</fieldName>
+        <description>The name/number of the claim</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>claimAmount</fieldName>
+        <description>The claim amount</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>fraudStatus</fieldName>
+        <description>The fraud risk status</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>fraudScore</fieldName>
+        <description>The fraud score</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>eventType</fieldName>
+        <description>The type of event (alert, update, resolved)</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

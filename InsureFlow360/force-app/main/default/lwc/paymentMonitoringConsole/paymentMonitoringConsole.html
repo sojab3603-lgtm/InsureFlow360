@@ -1,0 +1,165 @@
+<template>
+    <lightning-card title="Payment Monitoring Console" icon-name="standard:wallet">
+        <lightning-button-icon
+            icon-name="utility:refresh"
+            alternative-text="Refresh"
+            title="Refresh"
+            onclick={handleRefresh}
+            slot="actions"
+        ></lightning-button-icon>
+
+        <!-- Error Display -->
+        <template if:true={error}>
+            <lightning-alert variant="error" title="Error" closable>
+                {error}
+            </lightning-alert>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner variant="brand" size="large"></lightning-spinner>
+        </template>
+
+        <!-- Payment Summary Cards -->
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-grid_pull-padded">
+                <!-- Total Amount -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                    <div class="slds-box summary-card">
+                        <p class="slds-text-heading_small">Total Amount</p>
+                        <p class="slds-text-heading_large slds-m-top_medium">${totalAmount}</p>
+                    </div>
+                </div>
+
+                <!-- Completed Amount -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                    <div class="slds-box summary-card slds-theme_success slds-theme_alert-texture">
+                        <p class="slds-text-heading_small">Completed</p>
+                        <p class="slds-text-heading_large slds-m-top_medium">${completedAmount}</p>
+                    </div>
+                </div>
+
+                <!-- Status Summary Cards -->
+                <template for:each={statusSummary} for:item="status">
+                    <div key={status} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                        <div class="slds-box summary-card slds-theme_info slds-theme_alert-texture">
+                            <p class="slds-text-heading_small">{status}</p>
+                            <p class="slds-text-heading_large slds-m-top_medium">{statusSummary[status]}</p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="slds-m-around_medium">
+            <lightning-combobox
+                name="filterStatus"
+                label="Filter by Status"
+                value={filterStatus}
+                options={filterOptions}
+                onchange={handleFilterChange}
+                class="slds-form-element"
+            ></lightning-combobox>
+        </div>
+
+        <!-- Payment Transactions Table -->
+        <div class="slds-m-around_medium">
+            <template if:true={paymentTransactions.length}>
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col">
+                                <div class="slds-truncate">Claim ID</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate">Amount</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate">Method</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate">Status</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate">Reference</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate">Created</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate">Actions</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={paymentTransactions} for:item="transaction">
+                            <tr key={transaction.id} class="slds-line-height_reset">
+                                <td data-label="Claim ID">
+                                    <div class="slds-truncate">{transaction.claimName}</div>
+                                </td>
+                                <td data-label="Amount">
+                                    <div class="slds-truncate">${transaction.amount}</div>
+                                </td>
+                                <td data-label="Method">
+                                    <div class="slds-truncate">{transaction.method}</div>
+                                </td>
+                                <td data-label="Status">
+                                    <div class={transaction.statusClass}>
+                                        <lightning-icon
+                                            icon-name={transaction.statusIcon}
+                                            variant="base"
+                                            size="small"
+                                        ></lightning-icon>
+                                        <span class="slds-m-left_small">{transaction.status}</span>
+                                    </div>
+                                </td>
+                                <td data-label="Reference">
+                                    <div class="slds-truncate slds-text-body_small">{transaction.reference}</div>
+                                </td>
+                                <td data-label="Created">
+                                    <div class="slds-truncate slds-text-body_small">{transaction.createdDate}</div>
+                                </td>
+                                <td data-label="Actions">
+                                    <template if:true={transaction.errorMessage}>
+                                        <lightning-button
+                                            label="Retry"
+                                            size="small"
+                                            variant="neutral"
+                                            data-payment-id={transaction.id}
+                                            onclick={handleRetryPayment}
+                                            class="slds-m-right_small"
+                                        ></lightning-button>
+                                    </template>
+                                    <template if:true={transaction.isProcessing}>
+                                        <lightning-button
+                                            label="Cancel"
+                                            size="small"
+                                            variant="destructive"
+                                            data-payment-id={transaction.id}
+                                            onclick={handleCancelPayment}
+                                        ></lightning-button>
+                                    </template>
+                                </td>
+                            </tr>
+                            <template if:true={transaction.errorMessage}>
+                                <tr key={transaction.errorKey} class="error-row">
+                                    <td colspan="7">
+                                        <div class="slds-box slds-theme_alert-texture slds-theme_error slds-m_small">
+                                            <p class="slds-text-heading_small slds-m_none">Error: {transaction.errorMessage}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template if:false={paymentTransactions.length}>
+                <div class="slds-m-vertical_medium slds-text-align_center">
+                    <p class="slds-text-heading_small">No payment transactions found</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

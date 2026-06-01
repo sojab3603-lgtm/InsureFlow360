@@ -1,0 +1,89 @@
+<template>
+    <div class="notification-container">
+        <!-- Bell Icon Button -->
+        <div class="notification-bell">
+            <lightning-button-icon
+                icon-name="utility:notification"
+                alternative-text="Notifications"
+                title="Notifications"
+                onclick={handleToggleDropdown}
+                class={bellIconClass}
+            ></lightning-button-icon>
+            <template if:true={unreadCount}>
+                <span class="notification-count-badge">{unreadCount}</span>
+            </template>
+        </div>
+
+        <!-- Notification Dropdown -->
+        <div class={dropdownClass} onmouseleave={handleCloseDropdown}>
+            <div class="notification-dropdown slds-dropdown slds-dropdown_right">
+                <!-- Header -->
+                <div class="notification-dropdown-header slds-p-around_small">
+                    <h2 class="slds-text-heading_small">Notifications</h2>
+                    <template if:true={unreadCount}>
+                        <lightning-button
+                            label="Mark all as read"
+                            size="small"
+                            variant="base"
+                            onclick={handleMarkAllAsRead}
+                            class="slds-m-left_small"
+                        ></lightning-button>
+                    </template>
+                </div>
+
+                <!-- Notifications List -->
+                <div class="notification-list">
+                    <template if:true={notifications.length}>
+                        <template for:each={notifications} for:item="notification">
+                            <div
+                                key={notification.id}
+                                class={notification.itemClass}
+                                onclick={handleNotificationClick}
+                                data-notification-id={notification.id}
+                                data-record-id={notification.relatedRecordId}
+                            >
+                                <div class="notification-content">
+                                    <div class="notification-icon-wrapper">
+                                        <lightning-icon
+                                            icon-name={notification.iconName}
+                                            variant="base"
+                                            size="small"
+                                        ></lightning-icon>
+                                    </div>
+                                    <div class="notification-body">
+                                        <div class="notification-title">{notification.title}</div>
+                                        <div class="notification-message">{notification.message}</div>
+                                        <div class="notification-time">
+                                            {notification.createdDate}
+                                        </div>
+                                    </div>
+                                    <template if:false={notification.isRead}>
+                                        <span class="unread-indicator"></span>
+                                    </template>
+                                </div>
+                                <lightning-button-icon
+                                    icon-name="utility:close"
+                                    alternative-text="Delete"
+                                    title="Delete"
+                                    data-notification-id={notification.id}
+                                    onclick={handleDeleteNotification}
+                                    class="notification-delete-btn"
+                                ></lightning-button-icon>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:false={notifications.length}>
+                        <div class="slds-p-around_medium slds-text-align_center">
+                            <p class="slds-text-body_small">No notifications</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner variant="brand" size="small"></lightning-spinner>
+        </template>
+    </div>
+</template>

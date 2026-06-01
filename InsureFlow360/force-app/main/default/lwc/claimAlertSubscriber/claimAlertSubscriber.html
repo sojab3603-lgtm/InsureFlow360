@@ -1,0 +1,86 @@
+<template>
+    <lightning-card title="Claim Alert Subscriber" icon-name="standard:task">
+        <lightning-button-icon
+            icon-name="utility:clear"
+            alternative-text="Clear Alerts"
+            title="Clear"
+            onclick={handleClear}
+            slot="actions"
+        ></lightning-button-icon>
+
+        <!-- Alert Statistics -->
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-grid_pull-padded">
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-box slds-theme_alert-texture slds-theme_info">
+                        <p class="slds-text-heading_small">Total Received</p>
+                        <p class="slds-text-heading_large">{alertCount}</p>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <template if:true={newAlertCount}>
+                        <div class="slds-box slds-theme_alert-texture slds-theme_warning">
+                            <p class="slds-text-heading_small">New</p>
+                            <p class="slds-text-heading_large">{newAlertCount}</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Received Alerts Feed -->
+        <div class="slds-m-around_medium">
+            <template if:true={receivedAlerts.length}>
+                <div class="alert-feed">
+                    <template for:each={receivedAlerts} for:item="alert">
+                        <div key={alert.id} class="slds-box alert-item slds-m-bottom_small">
+                            <div class="slds-grid slds-grid_pull-padded">
+                                <div class="slds-col slds-size_1-of-12">
+                                    <template if:true={alert.isNew}>
+                                        <lightning-badge label="New" theme="warning" class="new-badge"></lightning-badge>
+                                    </template>
+                                    <lightning-icon
+                                        icon-name={alert.riskIcon}
+                                        variant="base"
+                                        size="small"
+                                        class={alert.riskIconClass}
+                                    ></lightning-icon>
+                                </div>
+                                <div class="slds-col slds-size_7-of-12">
+                                    <div class="slds-text-heading_small">{alert.claimName}</div>
+                                    <div class="slds-text-body_small slds-m-top_small">
+                                        Amount: ${alert.claimAmount}
+                                    </div>
+                                    <div class="slds-text-body_small">
+                                        Risk: {alert.fraudStatus} (Score: {alert.fraudScore})
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_3-of-12">
+                                    <div class="slds-text-body_small slds-text-align_right slds-text-color_weak">
+                                        {alert.timestamp}
+                                    </div>
+                                    <lightning-button
+                                        label="View"
+                                        size="small"
+                                        variant="neutral"
+                                        class="slds-m-top_small"
+                                        data-claim-id={alert.claimId}
+                                        onclick={navigateToClaim}
+                                    ></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={receivedAlerts.length}>
+                <div class="slds-m-vertical_medium slds-text-align_center">
+                    <p class="slds-text-heading_small">Waiting for alerts...</p>
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        Published alerts will appear here in real-time
+                    </p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

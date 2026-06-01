@@ -1,0 +1,72 @@
+<template>
+    <lightning-card title="Claim Alert Publisher" icon-name="standard:notification">
+        <lightning-button-icon
+            icon-name="utility:refresh"
+            alternative-text="Refresh"
+            title="Refresh"
+            onclick={handleRefresh}
+            slot="actions"
+        ></lightning-button-icon>
+
+        <!-- Error Display -->
+        <template if:true={error}>
+            <lightning-alert variant="error" title="Error" closable>
+                {error}
+            </lightning-alert>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner variant="brand" size="large"></lightning-spinner>
+        </template>
+
+        <!-- Alert Summary -->
+        <div class="slds-m-around_medium">
+            <p class="slds-text-heading_small">Ready to publish {alertCount} fraud alerts</p>
+            <lightning-button
+                label="Publish All Alerts"
+                variant="brand"
+                size="medium"
+                onclick={handlePublishAllAlerts}
+                class="slds-m-top_medium"
+            ></lightning-button>
+        </div>
+
+        <!-- Fraud Alerts List -->
+        <div class="slds-m-around_medium">
+            <template if:true={fraudAlerts.length}>
+                <div class="alert-list">
+                    <template for:each={fraudAlerts} for:item="alert">
+                        <div key={alert.Id} class="slds-box slds-m-bottom_small">
+                            <div class="slds-grid slds-grid_pull-padded">
+                                <div class="slds-col slds-size_8-of-12">
+                                    <p class="slds-text-heading_small">{alert.Name}</p>
+                                    <p class="slds-text-body_small slds-m-top_small">
+                                        Amount: ${alert.Claim_Amount__c}
+                                    </p>
+                                    <p class="slds-text-body_small">
+                                        Status: {alert.Fraud_Status__c}
+                                    </p>
+                                </div>
+                                <div class="slds-col slds-size_4-of-12">
+                                    <lightning-button
+                                        label="Publish"
+                                        size="small"
+                                        variant="base"
+                                        data-claim-id={alert.Id}
+                                        onclick={handlePublishAlert}
+                                    ></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={fraudAlerts.length}>
+                <div class="slds-m-vertical_medium slds-text-align_center">
+                    <p>No fraud alerts to publish</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

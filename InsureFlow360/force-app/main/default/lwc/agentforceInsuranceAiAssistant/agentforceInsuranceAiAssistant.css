@@ -1,0 +1,95 @@
+﻿.assistant-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.assistant-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.summary-card {
+    background: #f3f6ff;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.summary-label {
+    font-size: 0.85rem;
+    color: #5a5f66;
+}
+
+.summary-value {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1b183d;
+}
+
+.assistant-panel {
+    min-height: 240px;
+}
+
+.chat-history {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.message {
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.assistant-message {
+    background: #f4f8ff;
+    align-self: flex-start;
+}
+
+.user-message {
+    background: #ffffff;
+    align-self: flex-end;
+}
+
+.message-header {
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.message-body,
+.message-details {
+    white-space: pre-wrap;
+}
+
+.message-details {
+    margin-top: 0.5rem;
+    color: #3b3f4a;
+    font-size: 0.95rem;
+}
+
+.message-meta {
+    margin-top: 0.5rem;
+    color: #4a4a4a;
+    font-size: 0.85rem;
+}
+
+.assistant-actions {
+    margin-top: 0.75rem;
+    text-align: right;
+}
+
+.assistant-suggestions {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.assistant-error {
+    margin-top: 0.75rem;
+    color: #b00020;
+}

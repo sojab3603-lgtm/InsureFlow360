@@ -1,0 +1,87 @@
+﻿<template>
+    <lightning-card title="Agentforce Insurance AI Assistant" icon-name="standard:computer_problem">
+        <div class="assistant-container">
+            <template if:true={summary}>
+                <div class="assistant-summary">
+                    <div class="summary-card">
+                        <div class="summary-label">Total Claims</div>
+                        <div class="summary-value">{summary.totalClaims}</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Approved</div>
+                        <div class="summary-value">{summary.approvedClaims}</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Pending</div>
+                        <div class="summary-value">{summary.pendingClaims}</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">High Risk</div>
+                        <div class="summary-value">{summary.highRiskClaims}</div>
+                    </div>
+                </div>
+            </template>
+
+            <div class="assistant-panel">
+                <template if:true={hasHistory}>
+                    <div class="chat-history">
+                        <template for:each={chatHistory} for:item="message">
+                            <div key={message.key} class={message.cssClass}>
+                                <div class="message-header">{message.displayName}</div>
+                                <div class="message-body">{message.text}</div>
+                                <template if:true={message.detailsText}>
+                                    <div class="message-details">{message.detailsText}</div>
+                                </template>
+                                <template if:true={message.confidence}>
+                                    <div class="message-meta">Topic: {message.topic} · Confidence: {message.confidence}</div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={hasHistory}>
+                    <div class="assistant-welcome">
+                        <p>Ask the Agentforce AI Assistant about claims, payments, fraud alerts, or policy guidance.</p>
+                    </div>
+                </template>
+            </div>
+
+            <div class="assistant-input-section">
+                <lightning-textarea
+                    name="userQuery"
+                    label="Ask a question"
+                    value={userQuery}
+                    onchange={handleInputChange}
+                    placeholder="Type your insurance question here..."
+                ></lightning-textarea>
+
+                <div class="assistant-actions">
+                    <lightning-button
+                        label={sendButtonLabel}
+                        variant="brand"
+                        onclick={handleSend}
+                        disabled={sendDisabled}
+                    ></lightning-button>
+                </div>
+
+                <template if:true={quickSuggestions}>
+                    <div class="assistant-suggestions">
+                        <template for:each={quickSuggestions} for:item="suggestion">
+                            <lightning-button
+                                key={suggestion}
+                                label={suggestion}
+                                variant="neutral"
+                                onclick={handleSuggestionClick}
+                                data-suggestion={suggestion}
+                            ></lightning-button>
+                        </template>
+                    </div>
+                </template>
+
+                <template if:true={error}>
+                    <div class="assistant-error">{error}</div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

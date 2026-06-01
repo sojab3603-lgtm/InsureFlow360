@@ -1,0 +1,109 @@
+<template>
+    <lightning-card title="Executive Analytics Dashboard" icon-name="standard:report">
+        <lightning-button-icon
+            icon-name="utility:refresh"
+            alternative-text="Refresh"
+            title="Refresh"
+            onclick={handleRefresh}
+            slot="actions"
+        ></lightning-button-icon>
+
+        <!-- Error Display -->
+        <template if:true={error}>
+            <lightning-alert variant="error" title="Error" closable>
+                {error}
+            </lightning-alert>
+        </template>
+
+        <!-- KPI Cards -->
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-grid_pull-padded">
+                <!-- Average Claim Amount -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                    <div class="slds-box slds-box_link kpi-card">
+                        <div class="slds-media_small">
+                            <div class="slds-media__body">
+                                <h3 class="slds-text-heading_small">Average Claim Amount</h3>
+                                <p class="slds-text-heading_large slds-m-top_medium">${averageClaimAmount}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Claims Value -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                    <div class="slds-box slds-box_link kpi-card slds-theme_success slds-theme_alert-texture">
+                        <div class="slds-media_small">
+                            <div class="slds-media__body">
+                                <h3 class="slds-text-heading_small">Total Claims Value</h3>
+                                <p class="slds-text-heading_large slds-m-top_medium">${totalClaimsValue}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Average Approval Days -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                    <div class="slds-box slds-box_link kpi-card slds-theme_info slds-theme_alert-texture">
+                        <div class="slds-media_small">
+                            <div class="slds-media__body">
+                                <h3 class="slds-text-heading_small">Avg Approval Days</h3>
+                                <p class="slds-text-heading_large slds-m-top_medium">{avgApprovalDays}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fraud Rate -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                    <div class="slds-box slds-box_link kpi-card slds-theme_warning slds-theme_alert-texture">
+                        <div class="slds-media_small">
+                            <div class="slds-media__body">
+                                <h3 class="slds-text-heading_small">Fraud Rate</h3>
+                                <p class="slds-text-heading_large slds-m-top_medium">{fraudRatePercentage}%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-grid_pull-padded">
+                <!-- Claims by Status -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <div class="slds-box chart-container">
+                        <h3 class="slds-text-heading_small slds-m-bottom_medium">Claims by Status</h3>
+                        <div class="chart-placeholder slds-text-align_center slds-p-vertical_medium">
+                            <p>Chart visualization powered by Chart.js</p>
+                            <p class="slds-text-body_small slds-text-color_weak">Status distribution data</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fraud Risk Distribution -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <div class="slds-box chart-container">
+                        <h3 class="slds-text-heading_small slds-m-bottom_medium">Fraud Risk Distribution</h3>
+                        <div class="chart-placeholder slds-text-align_center slds-p-vertical_medium">
+                            <p>Chart visualization powered by Chart.js</p>
+                            <p class="slds-text-body_small slds-text-color_weak">Risk level breakdown</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claims by Amount Range -->
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-box chart-container">
+                        <h3 class="slds-text-heading_small slds-m-bottom_medium">Claims Distribution by Amount Range</h3>
+                        <div class="chart-placeholder slds-text-align_center slds-p-vertical_medium">
+                            <p>Chart visualization powered by Chart.js</p>
+                            <p class="slds-text-body_small slds-text-color_weak">Amount range analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

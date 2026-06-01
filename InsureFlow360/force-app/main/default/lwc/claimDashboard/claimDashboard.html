@@ -1,0 +1,134 @@
+<template>
+    <lightning-card title="Claim Dashboard" icon-name="standard:opportunity">
+        <lightning-button-icon
+            icon-name="utility:refresh"
+            alternative-text="Refresh"
+            title="Refresh"
+            onclick={handleRefresh}
+            slot="actions"
+            class="slds-m-right_small"
+        ></lightning-button-icon>
+
+        <!-- Error Display -->
+        <template if:true={error}>
+            <lightning-alert variant="error" title="Error" closable>
+                {error}
+            </lightning-alert>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner variant="brand" size="large"></lightning-spinner>
+        </template>
+
+        <!-- Summary Metrics -->
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-grid_pull-padded">
+                <!-- Total Claims Card -->
+                <div class={cardClass}>
+                    <div class="slds-box slds-box_link slds-media_small">
+                        <div class="slds-media__body">
+                            <h3 class="slds-text-heading_small">Total Claims</h3>
+                            <p class="slds-text-heading_large slds-m-top_medium">
+                                {claimSummary.totalClaims}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approved Claims Card -->
+                <div class={cardClass}>
+                    <div class="slds-box slds-box_link slds-media_small slds-theme_success slds-theme_alert-texture">
+                        <div class="slds-media__body">
+                            <h3 class="slds-text-heading_small">Approved</h3>
+                            <p class="slds-text-heading_large slds-m-top_medium">
+                                {claimSummary.approvedClaims}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Claims Card -->
+                <div class={cardClass}>
+                    <div class="slds-box slds-box_link slds-media_small slds-theme_warning slds-theme_alert-texture">
+                        <div class="slds-media__body">
+                            <h3 class="slds-text-heading_small">Pending</h3>
+                            <p class="slds-text-heading_large slds-m-top_medium">
+                                {claimSummary.pendingClaims}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High Risk Claims Card -->
+                <div class={cardClass}>
+                    <div class={highRiskClaimsClass}>
+                        <div class="slds-media__body">
+                            <h3 class="slds-text-heading_small">High Risk</h3>
+                            <p class="slds-text-heading_large slds-m-top_medium">
+                                {claimSummary.highRiskClaims}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Value Claims Table -->
+        <div class="slds-m-around_medium">
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">High Value Claims</h2>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col">
+                            <div class="slds-truncate">Claim Number</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate">Status</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate">Fraud Score</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate">Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={highValueClaims} for:item="claim">
+                        <tr key={claim.Id} class="slds-line-height_reset">
+                            <td data-label="Claim Number">
+                                <div class="slds-truncate">{claim.Name}</div>
+                            </td>
+                            <td data-label="Amount">
+                                <div class="slds-truncate">${claim.Claim_Amount__c}</div>
+                            </td>
+                            <td data-label="Status">
+                                <div class="slds-truncate">{claim.Claim_Status__c}</div>
+                            </td>
+                            <td data-label="Fraud Score">
+                                <div class="slds-truncate">{claim.Fraud_Score__c}</div>
+                            </td>
+                            <td data-label="Action">
+                                <lightning-button
+                                    label="View"
+                                    size="small"
+                                    data-claim-id={claim.Id}
+                                    onclick={navigateToClaim}
+                                ></lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            <template if:false={highValueClaims.length}>
+                <div class="slds-m-vertical_medium slds-text-align_center">
+                    <p>No high value claims found</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -86,4 +86,38 @@ public with sharing class ClaimService {
             );
         }
     }
+
+    /*
+     * Update Claim Fraud Status
+     */
+    @AuraEnabled
+    public static void updateClaimFraudStatus(
+        List<Id> claimIds,
+        String status
+    ) {
+
+        if (claimIds == null || claimIds.isEmpty()) {
+            throw new AuraHandledException('No claims selected');
+        }
+
+        List<Claim__c> claimsToUpdate = [
+            SELECT Id, Name, Fraud_Status__c
+            FROM Claim__c
+            WHERE Id IN :claimIds
+        ];
+
+        for (Claim__c claim : claimsToUpdate) {
+            claim.Fraud_Status__c = status;
+        }
+
+        if (!claimsToUpdate.isEmpty()) {
+            update claimsToUpdate;
+            
+            IntegrationLogService.createInfoLog(
+                'Fraud Alert Center',
+                'Updated fraud status for ' + claimsToUpdate.size() + ' claims to ' + status,
+                null
+            );
+        }
+    }
 }

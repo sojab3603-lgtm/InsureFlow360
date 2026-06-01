@@ -1,0 +1,107 @@
+<template>
+    <lightning-card title="Real-Time Event Stream" icon-name="standard:timelines">
+        <lightning-button-icon
+            icon-name="utility:refresh"
+            alternative-text="Reconnect"
+            title="Reconnect"
+            onclick={handleReconnect}
+            slot="actions"
+            class="slds-m-right_small"
+        ></lightning-button-icon>
+        <lightning-button-icon
+            icon-name="utility:clear"
+            alternative-text="Clear Events"
+            title="Clear"
+            onclick={handleClear}
+            slot="actions"
+        ></lightning-button-icon>
+
+        <!-- Connection Status -->
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-m-bottom_medium">
+                <div class="slds-col slds-size_6-of-12">
+                    <p class="slds-text-heading_small">Event Stream Status</p>
+                    <div class={connectionStatusClass}>
+                        <lightning-icon icon-name="utility:connected" size="x-small"></lightning-icon>
+                        <span class="slds-m-left_small">{connectionStatus}</span>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <p class="slds-text-heading_small">Events Captured</p>
+                    <p class="slds-text-heading_large">{eventStream.length}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Display -->
+        <template if:true={error}>
+            <lightning-alert variant="error" title="Error" closable>
+                {error}
+            </lightning-alert>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner variant="brand" size="large"></lightning-spinner>
+        </template>
+
+        <!-- Events Timeline -->
+        <div class="slds-m-around_medium">
+            <template if:true={eventStream.length}>
+                <div class="event-timeline">
+                    <template for:each={eventStream} for:item="event">
+                        <div key={event.id} class="slds-box event-item slds-m-bottom_medium">
+                            <div class="slds-grid slds-grid_pull-padded">
+                                <div class="slds-col slds-size_1-of-12">
+                                    <lightning-icon
+                                        icon-name={event.alertIcon}
+                                        variant="base"
+                                        size="medium"
+                                        class={event.alertIconClass}
+                                    ></lightning-icon>
+                                </div>
+                                <div class="slds-col slds-size_7-of-12">
+                                    <div class="slds-text-heading_small">
+                                        Claim: {event.claimId}
+                                    </div>
+                                    <div class="slds-text-body_small slds-m-top_small">
+                                        {event.message}
+                                    </div>
+                                    <div class="slds-text-body_small slds-m-top_small slds-text-color_weak">
+                                        Fraud Score: {event.fraudScore}
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_3-of-12">
+                                    <div class="slds-text-heading_small slds-text-align_right">
+                                        {event.alertType}
+                                    </div>
+                                    <div class="slds-text-body_small slds-m-top_small slds-text-align_right slds-text-color_weak">
+                                        {event.timestamp}
+                                    </div>
+                                    <lightning-button
+                                        label="View"
+                                        size="small"
+                                        class="slds-m-top_small"
+                                        data-claim-id={event.claimId}
+                                        onclick={navigateToClaim}
+                                    ></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={eventStream.length}>
+                <div class="slds-m-vertical_medium slds-text-align_center">
+                    <template if:true={isConnected}>
+                        <p class="slds-text-heading_small">Listening for events...</p>
+                        <p class="slds-text-body_small slds-text-color_weak">New events will appear here</p>
+                    </template>
+                    <template if:false={isConnected}>
+                        <p class="slds-text-heading_small">No events available</p>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

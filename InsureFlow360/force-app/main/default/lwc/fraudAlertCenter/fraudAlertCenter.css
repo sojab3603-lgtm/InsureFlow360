@@ -1,0 +1,33 @@
+.fraud-alert-item {
+    border-left: 4px solid #d32f2f;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.fraud-alert-item:hover {
+    background-color: #fff5f5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.risk-high {
+    color: #d32f2f;
+}
+
+.risk-medium {
+    color: #f57c00;
+}
+
+.risk-low {
+    color: #388e3c;
+}
+
+.fraud-alerts-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+:host ::slotted(lightning-badge) {
+    margin-left: 8px;
+}

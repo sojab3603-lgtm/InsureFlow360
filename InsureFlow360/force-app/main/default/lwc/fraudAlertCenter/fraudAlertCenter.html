@@ -1,0 +1,132 @@
+<template>
+    <lightning-card title="Fraud Alert Center" icon-name="standard:crisis_management">
+        <lightning-button-icon
+            icon-name="utility:refresh"
+            alternative-text="Refresh"
+            title="Refresh"
+            onclick={handleRefresh}
+            slot="actions"
+            class="slds-m-right_small"
+        ></lightning-button-icon>
+
+        <!-- Error Display -->
+        <template if:true={error}>
+            <lightning-alert variant="error" title="Error" closable>
+                {error}
+            </lightning-alert>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner variant="brand" size="large"></lightning-spinner>
+        </template>
+
+        <!-- Alert Summary -->
+        <div class="slds-m-around_medium">
+            <div class="slds-box slds-theme_alert-texture slds-theme_warning">
+                <p class="slds-text-heading_small slds-m-bottom_small">
+                    Active Fraud Alerts
+                </p>
+                <p class="slds-text-heading_large">{alertCount}</p>
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="slds-m-around_medium">
+            <lightning-combobox
+                name="filterStatus"
+                label="Filter by Risk Level"
+                value={filterStatus}
+                options={filterOptions}
+                onchange={handleFilterChange}
+                class="slds-form-element"
+            ></lightning-combobox>
+        </div>
+
+        <!-- Bulk Actions -->
+        <template if:true={selectedAlerts.length}>
+            <div class="slds-m-around_medium slds-box slds-theme_alert-texture slds-theme_info">
+                <p class="slds-m-bottom_small">{selectedAlerts.length} alerts selected</p>
+                <div class="slds-button-group-row" role="group">
+                    <lightning-button
+                        label="Mark as Reviewed"
+                        size="small"
+                        data-action="Reviewed"
+                        onclick={handleBulkAction}
+                    ></lightning-button>
+                    <lightning-button
+                        label="Clear Alerts"
+                        size="small"
+                        data-action="Cleared"
+                        onclick={handleBulkAction}
+                    ></lightning-button>
+                </div>
+            </div>
+        </template>
+
+        <!-- Fraud Alerts List -->
+        <div class="slds-m-around_medium">
+            <template if:true={fraudAlerts.length}>
+                <div class="fraud-alerts-list">
+                    <template for:each={fraudAlerts} for:item="alert">
+                        <div key={alert.Id} class="slds-box fraud-alert-item slds-m-bottom_medium">
+                            <div class="slds-grid slds-grid_pull-padded">
+                                <div class="slds-col slds-size_1-of-12">
+                                    <lightning-input
+                                        type="checkbox"
+                                        name={alert.Id}
+                                        checked={alert.isSelected}
+                                        data-claim-id={alert.Id}
+                                        onchange={handleSelectAlert}
+                                    ></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_4-of-12">
+                                    <div class="slds-text-heading_small">{alert.Name}</div>
+                                    <div class="slds-text-body_small slds-m-top_small">
+                                        Amount: ${alert.Claim_Amount__c}
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_3-of-12">
+                                    <lightning-icon
+                                        icon-name={alert.riskIcon}
+                                        variant="base"
+                                        size="small"
+                                        class={alert.riskClass}
+                                    ></lightning-icon>
+                                    <div class="slds-m-left_small slds-text-heading_small">
+                                        {alert.Fraud_Status__c}
+                                    </div>
+                                    <div class="slds-text-body_small">
+                                        Score: {alert.Fraud_Score__c}
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_3-of-12">
+                                    <div class="slds-text-heading_small">{alert.Claim_Status__c}</div>
+                                    <div class="slds-text-body_small slds-m-top_small">
+                                        <template if:true={alert.Investigation_Required__c}>
+                                            <lightning-badge label="Investigation Required" theme="warning"></lightning-badge>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-12">
+                                    <lightning-button
+                                        label="Review"
+                                        size="small"
+                                        variant="neutral"
+                                        data-claim-id={alert.Id}
+                                        onclick={handleReviewAlert}
+                                    ></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={fraudAlerts.length}>
+                <div class="slds-m-vertical_medium slds-text-align_center">
+                    <p class="slds-text-heading_small">No fraud alerts found</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

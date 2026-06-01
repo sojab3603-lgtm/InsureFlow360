@@ -1,0 +1,33 @@
+.event-timeline {
+    max-height: 600px;
+    overflow-y: auto;
+    padding: 10px 0;
+}
+
+.event-item {
+    border-left: 4px solid #0070d2;
+    padding: 16px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.event-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #f3f3f3;
+}
+
+.alert-icon-high {
+    color: #d32f2f;
+}
+
+.alert-icon-medium {
+    color: #f57c00;
+}
+
+.alert-icon-low {
+    color: #388e3c;
+}
+
+:host ::slotted(lightning-button) {
+    width: 100%;
+}
