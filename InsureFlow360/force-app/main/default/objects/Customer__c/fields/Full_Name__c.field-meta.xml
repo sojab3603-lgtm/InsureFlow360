@@ -3,6 +3,7 @@
     <fullName>Full_Name__c</fullName>
     <externalId>false</externalId>
     <label>Full Name</label>
+    <inlineHelpText>Enter the customer's full legal name exactly as it appears on official documents.</inlineHelpText>
     <length>255</length>
     <required>false</required>
     <trackTrending>false</trackTrending>

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Request__c</fullName>
     <label>Request</label>
+    <inlineHelpText>Provide the Request details.</inlineHelpText>
     <length>32768</length>
     <trackTrending>false</trackTrending>
     <type>LongTextArea</type>

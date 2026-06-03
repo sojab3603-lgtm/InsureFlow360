@@ -3,6 +3,7 @@
     <fullName>Source_System__c</fullName>
     <externalId>false</externalId>
     <label>Source System</label>
+    <inlineHelpText>Enter the Source System.</inlineHelpText>
     <length>100</length>
     <required>false</required>
     <trackTrending>false</trackTrending>

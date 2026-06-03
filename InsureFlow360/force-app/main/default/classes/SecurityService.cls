@@ -37,14 +37,14 @@ public with sharing class SecurityService {
         if (input == null) {
             return null;
         }
-        // Remove potentially malicious characters
-        String sanitized = input.replaceAll('<script>', '')
-                               .replaceAll('</script>', '')
-                               .replaceAll('<iframe>', '')
-                               .replaceAll('</iframe>', '')
-                               .replaceAll('javascript:', '')
-                               .replaceAll('onerror=', '')
-                               .replaceAll('onclick=', '');
+
+        String sanitized = input;
+        sanitized = sanitized.replaceAll('(?i)<script.*?>.*?</script>', '');
+        sanitized = sanitized.replaceAll('(?i)<iframe.*?>.*?</iframe>', '');
+        sanitized = sanitized.replaceAll('(?i)<.*?>', '');
+        sanitized = sanitized.replaceAll('(?i)javascript:', '');
+        sanitized = sanitized.replaceAll('(?i)on\\w+\\s*=', '');
+        sanitized = sanitized.trim();
         return sanitized;
     }
 
@@ -60,7 +60,19 @@ public with sharing class SecurityService {
         Map<String, Schema.SObjectField> fieldMap = describeResult.fields.getMap();
 
         for (String fieldName : fieldNames) {
-            Schema.SObjectField field = fieldMap.get(fieldName.toLowerCase());
+            String matchingKey = null;
+            if (fieldMap.containsKey(fieldName)) {
+                matchingKey = fieldName;
+            } else {
+                for (String key : fieldMap.keySet()) {
+                    if (key.equalsIgnoreCase(fieldName)) {
+                        matchingKey = key;
+                        break;
+                    }
+                }
+            }
+
+            Schema.SObjectField field = matchingKey == null ? null : fieldMap.get(matchingKey);
             if (field == null || !field.getDescribe().isAccessible()) {
                 throw new SecurityException('Access denied to field: ' + fieldName);
             }

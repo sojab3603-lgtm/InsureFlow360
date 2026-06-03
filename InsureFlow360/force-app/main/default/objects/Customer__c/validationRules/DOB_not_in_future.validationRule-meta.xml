@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DOB_not_in_future</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(NOT(ISBLANK(Date_Of_Birth__c)), Date_Of_Birth__c > TODAY())</errorConditionFormula>
+    <errorDisplayField>Date_Of_Birth__c</errorDisplayField>
+    <errorMessage>Date of Birth cannot be in the future.</errorMessage>
+</ValidationRule>

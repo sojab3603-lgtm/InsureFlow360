@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Insurance_Policy__c</fullName>
     <label>Insurance Policy</label>
+    <inlineHelpText>Select the related insurance policy that covers this claim.</inlineHelpText>
     <referenceTo>Insurance_Policy__c</referenceTo>
     <relationshipLabel>Claims</relationshipLabel>
     <relationshipName>Claims</relationshipName>

@@ -3,6 +3,7 @@
     <fullName>Claim__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <label>Claim</label>
+    <inlineHelpText>Select the related Claim.</inlineHelpText>
     <referenceTo>Claim__c</referenceTo>
     <relationshipLabel>Fraud Alerts</relationshipLabel>
     <relationshipName>Fraud_Alerts</relationshipName>

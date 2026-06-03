@@ -6,6 +6,7 @@
     <isNameField>false</isNameField>
     <isSortingDisabled>false</isSortingDisabled>
     <label>Alert Type</label>
+    <inlineHelpText>Enter the Alert Type.</inlineHelpText>
     <length>20</length>
     <required>false</required>
     <type>Text</type>

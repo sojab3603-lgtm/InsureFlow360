@@ -1,15 +1,16 @@
-﻿import { LightningElement, track } from 'lwc';
+﻿import { LightningElement } from 'lwc';
 import getWelcomeMessage from '@salesforce/apex/AgentforceInsuranceAiAssistantController.getWelcomeMessage';
 import getClaimSummary from '@salesforce/apex/AgentforceInsuranceAiAssistantController.getClaimSummary';
 import processUserQuery from '@salesforce/apex/AgentforceInsuranceAiAssistantController.processUserQuery';
 
 export default class AgentforceInsuranceAiAssistant extends LightningElement {
-    @track chatHistory = [];
-    @track userQuery = '';
-    @track isLoading = false;
-    @track error = null;
-    @track summary = null;
-    @track quickSuggestions = [];
+    chatHistory = [];
+    userQuery = '';
+    isLoading = false;
+    error = null;
+    summary = null;
+    quickSuggestions = [];
+    assistantHelpText = 'Type a claim, fraud, payment, or policy question above or tap a suggestion for instant guidance.';
 
     connectedCallback() {
         this.loadWelcomeMessage();

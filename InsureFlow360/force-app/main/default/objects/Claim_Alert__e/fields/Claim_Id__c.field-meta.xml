@@ -6,6 +6,7 @@
     <isNameField>false</isNameField>
     <isSortingDisabled>false</isSortingDisabled>
     <label>Claim Id</label>
+    <inlineHelpText>Enter the Claim Id.</inlineHelpText>
     <length>18</length>
     <required>false</required>
     <type>Text</type>

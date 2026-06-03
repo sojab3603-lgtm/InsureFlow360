@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Premium_Amount__c</fullName>
     <label>Premium Amount</label>
+    <inlineHelpText>Enter the Premium Amount amount.</inlineHelpText>
     <precision>18</precision>
     <required>false</required>
     <scale>0</scale>

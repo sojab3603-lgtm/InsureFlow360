@@ -4,6 +4,7 @@
     <formula>End_Date__c = (TODAY() + 30)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Expiring In 30 Days</label>
+    <inlineHelpText>Check this box if Expiring In 30 Days.</inlineHelpText>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

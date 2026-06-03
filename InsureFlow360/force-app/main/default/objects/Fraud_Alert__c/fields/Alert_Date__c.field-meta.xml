@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Alert_Date__c</fullName>
     <label>Alert Date</label>
+    <inlineHelpText>Enter the Alert Date.</inlineHelpText>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>

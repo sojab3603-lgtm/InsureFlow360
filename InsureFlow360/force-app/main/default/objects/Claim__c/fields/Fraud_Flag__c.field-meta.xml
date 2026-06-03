@@ -3,6 +3,7 @@
     <fullName>Fraud_Flag__c</fullName>
     <defaultValue>false</defaultValue>
     <label>Fraud Flag</label>
+    <inlineHelpText>Check this box if Fraud Flag.</inlineHelpText>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

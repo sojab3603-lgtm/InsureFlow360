@@ -22,6 +22,11 @@
                 </div>
             </template>
 
+            <div class="assistant-intro">
+                <div class="assistant-intro-title">Need quick guidance?</div>
+                <div class="assistant-intro-text">{assistantHelpText}</div>
+            </div>
+
             <div class="assistant-panel">
                 <template if:true={hasHistory}>
                     <div class="chat-history">
@@ -52,7 +57,7 @@
                     label="Ask a question"
                     value={userQuery}
                     onchange={handleInputChange}
-                    placeholder="Type your insurance question here..."
+                    placeholder="Start typing a question about claims, fraud, payments, or policy coverage..."
                 ></lightning-textarea>
 
                 <div class="assistant-actions">

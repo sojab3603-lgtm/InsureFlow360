@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Date_Of_Birth__c</fullName>
     <label>Date Of Birth</label>
+    <inlineHelpText>Enter the customer's date of birth. The date must be in the past.</inlineHelpText>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>

@@ -3,6 +3,7 @@
     <fullName>Claim_Processed__c</fullName>
     <defaultValue>false</defaultValue>
     <label>Claim Processed</label>
+    <inlineHelpText>Check this box if Claim Processed.</inlineHelpText>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

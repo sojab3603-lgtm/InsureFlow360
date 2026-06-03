@@ -3,6 +3,7 @@
     <fullName>Insurance_Policy__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <label>Insurance Policy</label>
+    <inlineHelpText>Select the related Insurance Policy.</inlineHelpText>
     <referenceTo>Insurance_Policy__c</referenceTo>
     <relationshipLabel>Underwritings</relationshipLabel>
     <relationshipName>Underwritings</relationshipName>

@@ -35,11 +35,8 @@ public with sharing class AgentforceInsuranceAiAssistantController {
 
     @AuraEnabled
     public static AssistantResponse processUserQuery(String userQuery) {
-        String safeQuery = userQuery == null ? '' : userQuery.trim();
+        String safeQuery = String.isBlank(userQuery) ? '' : userQuery.trim();
         safeQuery = SecurityService.sanitizeInput(safeQuery);
-        AssistantResponse response = new AssistantResponse();
-        response.confidence = '0.88';
-        response.topic = 'General';
 
         if (String.isBlank(safeQuery)) {
             return createResponse(
@@ -170,11 +167,18 @@ public with sharing class AgentforceInsuranceAiAssistantController {
 
     private static AssistantResponse createResponse(String reply, String topic, String confidence, List<String> suggestions, String detailsText) {
         AssistantResponse response = new AssistantResponse();
-        response.reply = reply;
+        response.reply = SecurityService.encodeOutput(reply);
         response.topic = topic;
         response.confidence = confidence;
-        response.suggestions = suggestions;
-        response.detailsText = detailsText;
+        response.suggestions = suggestions == null ? new List<String>() : new List<String>();
+
+        if (suggestions != null) {
+            for (String suggestion : suggestions) {
+                response.suggestions.add(SecurityService.encodeOutput(suggestion));
+            }
+        }
+
+        response.detailsText = SecurityService.encodeOutput(detailsText);
         return response;
     }
 

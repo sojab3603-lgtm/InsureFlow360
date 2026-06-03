@@ -3,6 +3,7 @@
     <fullName>Endpoint__c</fullName>
     <externalId>false</externalId>
     <label>Endpoint</label>
+    <inlineHelpText>Enter the Endpoint.</inlineHelpText>
     <length>50</length>
     <required>false</required>
     <trackTrending>false</trackTrending>

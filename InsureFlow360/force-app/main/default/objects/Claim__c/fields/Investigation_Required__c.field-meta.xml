@@ -3,6 +3,7 @@
     <fullName>Investigation_Required__c</fullName>
     <defaultValue>false</defaultValue>
     <label>Investigation Required</label>
+    <inlineHelpText>Check this box if Investigation Required.</inlineHelpText>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

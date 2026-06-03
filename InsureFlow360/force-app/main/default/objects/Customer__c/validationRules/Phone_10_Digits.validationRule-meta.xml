@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <errorConditionFormula>AND(NOT(ISBLANK(Phone__c)), NOT(REGEX(Phone__c, "[0-9]{10}")))</errorConditionFormula>
+    <errorDisplayField>Phone__c</errorDisplayField>
+    <errorMessage>Phone must contain exactly 10 digits with no spaces or symbols.</errorMessage>
+    <fullName>Phone_10_Digits</fullName>
+</ValidationRule>

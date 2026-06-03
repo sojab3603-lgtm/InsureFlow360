@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Payload__c</fullName>
     <label>Payload</label>
+    <inlineHelpText>Provide the Payload details.</inlineHelpText>
     <length>32768</length>
     <trackTrending>false</trackTrending>
     <type>LongTextArea</type>

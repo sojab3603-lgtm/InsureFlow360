@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Customer__c</fullName>
     <label>Customer</label>
+    <inlineHelpText>Select the related Customer.</inlineHelpText>
     <referenceTo>Customer__c</referenceTo>
     <relationshipLabel>Insurance Policies</relationshipLabel>
     <relationshipName>Insurance_Policies</relationshipName>

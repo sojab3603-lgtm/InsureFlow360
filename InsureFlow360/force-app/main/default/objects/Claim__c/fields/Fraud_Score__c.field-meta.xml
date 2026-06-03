@@ -3,6 +3,7 @@
     <fullName>Fraud_Score__c</fullName>
     <externalId>false</externalId>
     <label>Fraud Score</label>
+    <inlineHelpText>Enter the Fraud Score.</inlineHelpText>
     <precision>3</precision>
     <required>false</required>
     <scale>0</scale>

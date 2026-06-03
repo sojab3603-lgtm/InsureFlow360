@@ -5,6 +5,7 @@
     <isNameField>false</isNameField>
     <isSortingDisabled>false</isSortingDisabled>
     <label>Message</label>
+    <inlineHelpText>Provide the Message details.</inlineHelpText>
     <length>32768</length>
     <type>LongTextArea</type>
     <visibleLines>3</visibleLines>

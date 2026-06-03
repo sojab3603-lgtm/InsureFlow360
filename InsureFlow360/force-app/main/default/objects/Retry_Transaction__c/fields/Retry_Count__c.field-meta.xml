@@ -3,6 +3,7 @@
     <fullName>Retry_Count__c</fullName>
     <externalId>false</externalId>
     <label>Retry Count</label>
+    <inlineHelpText>Enter the Retry Count.</inlineHelpText>
     <precision>18</precision>
     <required>false</required>
     <scale>0</scale>

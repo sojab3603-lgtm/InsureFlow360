@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Claim_Amount__c</fullName>
     <label>Claim Amount</label>
+    <inlineHelpText>Enter the claim amount in the policy currency. Use numbers only.</inlineHelpText>
     <precision>18</precision>
     <required>false</required>
     <scale>0</scale>

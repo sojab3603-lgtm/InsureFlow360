@@ -3,6 +3,7 @@
     <fullName>Email__c</fullName>
     <externalId>false</externalId>
     <label>Email</label>
+    <inlineHelpText>Enter a valid email address for the customer, such as user@example.com.</inlineHelpText>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Email</type>
