@@ -13,7 +13,7 @@ public with sharing class AgentforceInsuranceAiAssistantController {
         return createResponse(
             'Hello! I am your Agentforce Insurance AI Assistant. I can help you understand claim status, fraud risk, payment monitoring, and policy guidance.',
             'Welcome',
-            '0.97',
+           0.97 ,
             new List<String>{
                 'Show me the current claim summary',
                 'What are the latest fraud alerts?',
